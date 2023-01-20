@@ -1,0 +1,79 @@
+
+	https://git-scm.com/book/ru/v2
+	
+	
+	1. РАССКАЗ КАК МЫ ХРАНИЛИ ФАЙЛЫ РАНЬШЕ. СМОТРИМ НА МУССОН.
+	2. КАКИЕ ТРЕБОВАНИЯ МЫ ПРЕДЯВЛЯЕМ К ХОРОШЕЙ СИСТЕМЕ ВЕРСЕОННОГО КОНТРОЛЯ. СЛАЙД
+	3. ТИПЫ СИСТЕМ ВЕРСИОННОГО КОНТРОЛЯ. ПРЕЗИНТАЦИЯ
+	4. УСТАНОВИТЬ ГИТ
+	5. СКОНФИГУРИРУЕМ 
+	
+	git config --global user.mname 
+	git config --global user.email
+	
+	проверим git config --global -l
+	
+	6. СОЗДАЕМ РЕПОЗИТОРИЙ НА ГИТХАБ
+	
+	склонируем репозиторий 
+	git clone 
+	
+	посмотрим что получилось.
+	
+	проверим что это гитхаб 
+	git remote -v 
+	создадим файл локально 
+	joe song.txt
+	git status 
+	git add song.txt
+	git commiit -m "new file song"
+	
+	git log
+	git push
+	
+	Давайте теперь, смоделируем ситуацию  когд кто то сделал коммит на сервер. Для этого мы насервере изменим наш файл и сделаем коммит.
+	
+	синхронизируем наш локальный гит с сервером
+	git pull
+	смотрим на наш файл - он изменился.
+	смотрим git log -  добавился еще коммит.
+	
+	7. СОЗДАЕМ ГИТ ХРАНИЛИЩЕ ЛОКАЛЬНО
+		
+	git init
+	git add 
+	git commit
+	
+	посмотрим на git remoute -v -   У нас не удаленног репозитория.
+	Давайте создадим пустой репо на гит хаб
+	и выполним то что нам рекомендует гит
+	git remote add origin git@github.com:AndreevVE/MyGitTest.git
+	git branch -M main
+	git push -u origin main
+	
+	8. КАК СОЗДАТЬ РЕПО НА ГИТХАБ ИЗ КОМАНДНОЙ СТРОКИ
+	1. Нужно создать токен гитхаб.  Не забыть его скопировать себе. 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
+	Settings Developer settings
+	
+	Создаем локальный репо как выше.
+	git init 
+	git add
+	git commit
+	
+	curl -u 'AndreevVE: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' https://api.github.com/user/repos -d '{"name":"GitTest"}'
+	
+	git remote add origin git@github.com:AndreevVE/GitTest.git
+	git branch -M main
+	git push -u origin main
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
