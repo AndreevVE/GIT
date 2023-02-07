@@ -1,0 +1,94 @@
+1. ВСПОМНИМ О ЧЕМ ГОВОРИЛИ НА ПРОШЛОМ ЗАНЯТИИ.
+	* Немного узнали о типах VCS
+	* познакомились с GIT
+	* научились создавать репозиторий (через WEB в gihhub, локально, с консоли на github) (Команды которые мы уже знаем? git init, git add, git commit, git clone 
+	* узнали какие состаяния могут быть у файлов GIT -  вопрос какие? modified - Staget - committed 
+	
+	https://git-scm.com/book/ru/v2
+	
+2.Что сегодня
+
+	* ПОСМОТРИМ КАК РАБОТАТЬ С GIT ЛОКАЛЬНО. 
+	Создаем файл joe song.txt , вставляю две строки, git add song.txt,  git status, git commin -m "New file", git status, git push
+	смотрим github  - Это наш норамльный режим работы когда мы все делали правиль и не ошибались. Но так не бывает.
+	* УЧИМСЯ ИСПРАВЛЯТЬ ОШИДКИ
+	1. Добавим плохую строку song.txt and REDMY
+	посмотрим git status - Видим что есть два измененных файла. Но мы хотим откатить это  ( откат безвозвратный)
+	git checkout . (или один конкретный файл) - все изменения исчезли.
+	2. Добавим совершенно новые файлы о которых git еще ни чего не знает.  echo "New fail 1" > new-file.txt смотрим git status. Мы решили что эти файлы совсем не нужны в нашем проекте.
+	git checkut - Нам не поможет
+	git clean -x (игнорируем правила гитигнор) d- удалять все вложенные директории f- форсе (сила) иначе по умолчанию гит ни чего не делает.   Удаляет неотслеживаемые файлы.
+	Лучше сначала использовать git clean -ndx  - Вы просто сможете уфидеть что будет удалено.
+	3. Ситуация когда мы уже добавили ненужный файл в индекс.
+	Создаем файлы
+	 git add * - Ой добавил лишний файл, уберем его git restore --staged song.txt~, git reset file . Сказать про разницу git reset  и  git restore  - Гит рестор появился в новых версиях начина с 2.23.0
+	 Ok
+	4. Мы добавили файлы и успели сделать коммит и тут одумались.
+	git commit -m "Add bed text"  - Но нам такое не нравится, почистим. 
+	Если в цело маш комит правильный но мы хотим его дополнить. То 
+	git commit --amend - m "fff" 
+	
+	git log - смотрим HEAD
+	
+	git reset HEAD^^ - кереты или git reset HEAD~1 
+	
+	чуть больше про git reset --soft  - вернет фыйлы в индех.
+	по умалчанию вызывается с флагом --mixed - возвращает файлы в рабочую директорию.
+	      
+	ВАЖНО  (gig rest --hard -удалит безвозвратно коми. ОПАСНО!)
+	
+	5. Мы успели выполнить git push на github.  И поняли что наш последний комит плохой. Что делать?
+	git log - Ищим HEAD последнего коммита
+	git revert HEAD - редактируем комментарии   Создает новый комит зеркальный предидущиму.
+	git push
+	
+	Другой способ
+	git log - смотрим HEAD
+	git reset HEAD 
+	git push --force  
+	
+	* РАССМОТРИМ ФАЙЛ .GITIGNORE 
+		Мы не хотим чтобы некоторые файлы индексировались и добовлялись в коммиты. 
+	Создадим  файл .gitignore joe .gitignore 
+	
+	
+	* ПОЗНАКОМИМСЯ С ВЕТКАМИ 
+	создадим новую ветку git branch test   (для переключения сразу git checkout -b test )
+	git checkout test
+	git log --oneline - HEAD указывает на один и тот же коммит
+	joe song.txt ; git add ; git commit -m "Added two lines" song.txt
+	git log --oneline - HEAD указывает на разные коммиты
+	git checkout main
+	Добавим сюда новый комит joe song.txt
+	git add song.txt; git commit -m "Added four new lines" song.txt 
+	git log --oneline --decorate --graph --all
+	Теперь история наших веток разошлась.  Что еще мы можем посмотреть git branch или с -v
+	
+	Рассмотрим fast-forward merge. 
+	изменяю файл только в ветке тест.
+	
+	Рассмотрим non fast-forward merge
+	добавим в тест еще комит. joe song.txt ; git add ; git commit -m "Added two lines" song.txt
+	Вернемся в main git checkout main
+	попробуем слить ветки 
+	git merge test - У на возник конфликт. Давайте его разрешим. Откроем текст в редакторе примем решение
+	git add song.txt; git commit -m "merge test"
+	Мы смерджили две ветки 
+	Удалим ненужную
+	git branch -d test
+	git log --oneline --decorate --graph --all
+	
+	git reset --merge ORIG_HEAD
+	
+	
+	
+	
+	https://drive.google.com/file/d/1XEVf7urM5Ra0yxqTaR7Xr63ygi4hgjJB/view?usp=share_link
+	
+	
+	
+	
+	
+	
+	
+	
